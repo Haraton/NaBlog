@@ -4,6 +4,7 @@
 <meta name="generator" content="jemdoc, see http://jemdoc.jaboc.net/" />
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <link rel="stylesheet" href="../styles/jemdoc.css" type="text/css" />
+<link rel="icon" href="../pics/profile.ico" type="image/x-ico" />
 
 <title>点云处理相关技术调研综述</title>
 
@@ -13,46 +14,48 @@
 <a id="home" class="anchor"></a>
 <div id="container"> 
 <div class="container"> 
-    <h1 style="color: rgb(0, 0, 0); text-align: center">点云处理相关技术调研综述</h1>
+    <h1 style="color: rgb(0, 0, 0); text-align: center">点云补全研究综述</h1>
     <!-- <h2 style="color: rgb(0, 0, 0);">0 引言</h2> -->
     <p class="p1">
-        3D点云与2D图像不同，它包含了更加丰富的坐标信息，也相对于2D图像隐藏了更多空间结构信息与更丰富的语义信息，
-        处理点云数据并获得其隐含的各种信息便显得尤为重要，在计算机技术高速发展的现代，随着计算手段的增加和计算效率的大幅提高，
-        处理海量点云数据也变的更加现实，各种点云特征提取算法与点云关键点检测算法也得到了高速发展。
-        本文主要分为三个部分，对点云的相关技术进行了调研汇总。
+        随着激光雷达、激光或RGB-D扫描仪等三维扫描设备的普及，点云数据的获取变得更加容易，
+        已在机器人、自动驾驶、三维建模和制造等领域产生了大量的研究。
+        然而，由于遮挡、反射、透明度以及设备分辨率和角度的限制，这些设备直接收集的原始点云数据是不均匀的、局部的。
+        因此，从局部的点云数据中生成完整的点云对于促进下游应用的发展至关重要。
+        点云补全技术在各种计算机视觉应用中有着独特而关键的作用。
     </p>
-    <p class="p1">
-        点云是一种描述空间点的位置、颜色等信息的数据结构，相比于图像这种规则的二维数据结构，
-        点云具有无序性、稀疏性、信息不完整性和无组织性等特点。目前，
-        快速点直方图（FPFH）是一种最常用的特征提取算法，它是一种几何特征描述符，考虑局部范围内所有点之间的位置影响和法线关系，
-        描述局部范围内数据的几何特征，具有位置信息不变性的特点。FPFH是点特征直方图（Point Feature Histograms，PFH）的扩展，
-        主要在计算效率方面进行了较大改进，但是依然保留了PFH大部分的特性，计算复杂度为O(nk)。
-    </p>
-    <div style="display: flex;justify-content: space-around;align-items: center; height: 300px">
-        <img alt="" src="../pics/fpfh.jpg" />
+    <div style="display: flex;justify-content: space-around;align-items: center">
+        <img alt="" src="../pics/点云补全.jpg"/>
     </div>
-    <p align="center"><strong>图1 中心点P计算FPFH的影响范围</strong></p>
+    <p align="center"><strong>图1 点云补全示例</strong></p>
     <p class="p1">
-        关键点检测是点云配准技术中的一个关键环节。关键点不仅包含了模型的重要信息，而且有助于减少点云计算的数据量，可以节约计算时间和存储空间。
-        早期大部分三维关键点检测算法都是直接从二维拓展而来，如SIFT（Scale Invariant Feature Transform）、Harris等算法。
-        近年来，关键点检测算法得到快速发展，一些新得算法如ISS3D、NARF、RSKDD-Net等也不断被提出。
-        目前存在的关键点提取算法有很多，各种算法有不同的优缺点，根据各算法的计算原理，其在模型上对关键点检测时无论是数量还是旋转平移不变等特性均有不同。
-        因此，研究关键点检测算法针对模型特征的适应性，对于点云配准是很有实用性的。
+        <strong>3d重建：</strong>生成完整的3D场景是许多计算机视觉任务的基础和重要技术，包括自动驾驶中的高分辨率3D地图重建、
+        机器人应用中的3D重建和地下采矿。例如，应用在机器人领域的点云补全可以通过构建3D场景来帮助进行路线规划和决策。
+        除此之外，在地下开采空间进行大规模三维环境重建，有利于准确监测开采安全。<br/>
+        
     </p>
-    <div style="display: flex;justify-content: space-around;align-items: center; height: 300px">
-        <img alt="" src="../pics/Harris3D.jpg" />
-    </div>
-    <p align="center"><strong>图2 Harris3D 计算面</strong></p>
     <p class="p1">
-        激光点云的噪声分为离散噪声点和混合噪声点两类。离散噪声在空间上远离目标点，混合噪声在空间上和目标点混合在一起。
-        对于离散噪声点，主要是利用噪声点在空间位置上和目标点存在着明显的差异进行噪声的去除，
-        已经形成的方法有：基于统计的去噪算法，半径滤波去噪算法，基于聚类的去噪算法。
+        <strong>三维检测：</strong>3D目标检测依赖于完整的点云来保持优异的性能。例如，激光雷达捕捉到的远处的汽车往往是稀疏的，
+        通常很难被检测到。我们通常需要对目标点云进行完全分割才能完成检测。例如，在对 KITTI 数据集进行三维检测时，
+        需要对车辆点云进行分割并对其车辆朝向和规模做归一化处理，然后才能获得完整的车辆点云。
+    </p>
+    <p class="p1">
+        <strong>3d形状分类：</strong>对于三维形状分类，最终需要从部分观测恢复完整的点云。局部点云代表物体的一小部分，通常难以识别。
+    </p>
+    <p class="p1">
+        以上，由于点云补全在许多实际的计算机视觉应用中起着至关重要的作用，因此迫切需要对点云补全技术进行广泛的研究。
+        然而，关于点云补全及其下游任务的调查研究很少，而深度学习在点云补全方面的最新进展迫切需要总结。
+        在过去的几年里，研究人员尝试了许多方法来完成深度学习中的点云补全技术。
+        早期对点云补全的尝试试图通过体素化和三维卷积将成熟的方法从2D补全任务转移到3D点云。
+        然而，随着空间分辨率的提高，这些方法的计算成本较高。随着PointNet和PointNet++的巨大成功，
+        直接处理三维坐标已经成为三维点云分析的主流方法。该技术在许多开创性的点云补全工作中得到了进一步应用，
+        其中一个编码器-解码器方案被设计出来生成完整点云。近年来，基于点的补全方法、基于视图的补全方法、基于卷积的补全方法、
+        基于图的补全方法、基于生成模型的补全方法、基于transformer的补全方法等也如雨后春笋一样涌现出来，并取得了显著的成果。
     </p>
     
 <div id="footer">
     <div id="footer-text">
-        upload by <strong>Nanami</strong> on December 12, 2022 at 11:23 am. click 
-        <a href="https://www.pengqi.club/3599.html"><strong>here</strong></a>
+        upload by <strong>Nanami</strong> on March 07, 2023 at 02:23 pm. click 
+        <a href="https://docs.google.com/document/d/1ghCO7OnugWZPd0rjSXkz1eNJvdeO6EyA/edit?usp=drive_link&ouid=112844428871035202140&rtpof=true&sd=true"><strong>here</strong></a>
         to access full text.
     </div>
 </div>

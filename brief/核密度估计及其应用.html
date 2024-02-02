@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta name="generator" content="jemdoc, see http://jemdoc.jaboc.net/" />
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<link rel="stylesheet" href="../styles/jemdoc.css" type="text/css" />
+<link rel="icon" href="../pics/profile.ico" type="image/x-ico" />
+
+<title>核密度估计及其应用</title>
+
+</head>
+<body>
+
+<a id="home" class="anchor"></a>
+<div id="container"> 
+<div class="container"> 
+    <h1 style="color: rgb(0, 0, 0); text-align: center">核密度估计及其应用</h1>
+    <p class="p1">
+        核密度估计是一种估计概率密度函数分布的技术，它使用户能够比使用传统的直方图更好地分析所研究的概率分布。
+        与直方图不同的是，核密度估计能产生平滑的概率密度函数估计值，使用了所有样本点的位置，并更令人信服地提出了多模态。
+        在二维应用中，核密度估计的效果甚至更好，因为二维直方图需要额外定义二维箱子的方向。核密度估计有两个基本概念：
+        核函数形状和平滑系数，其中平滑系数对核密度估计至关重要。文中展示了几个单变量和双变量应用的实际例子。
+    </p>
+    <p class="p1">
+        在所有概率分布函数中，概率密度函数（pdf）最能体现整个概率在X轴（即X随机变量的值­）上的分布情况。
+        然而，最古老的pdf经验表示法直方图是一个高度主观的结构，因为它的形状取决于对样本范围所划分的类间隔（箱）的数量（或宽度）的主观选择，
+        以及对初始点的选择（例如）。为此，人们提出了多种计算公式，其中大多数只将区间数与样本大小相关联；其他公式还包括某些样本特征，如标准差、四分位数间距或偏度。
+    </p>
+    <div style="display: flex;justify-content: space-around;align-items: center">
+        <img alt="" src="../pics/核密度估计1.jpg" />
+    </div>
+    <p align="center"><strong>图1 不同核函数的形状</strong></p>
+    
+    <p class="p1">
+        无论使用哪种类选择方法，直方图都有其缺陷：数据分箱，该方法用分箱（区间）位置来代替数据本身的位置。
+        这导致直方图形状变得不连续，并且在每个分箱中都是平坦的。
+    </p>
+    <p class="p1">
+        概率密度函数的核估计没有这些缺点。在大多数实际应用中，它基于所有样本数据的位置生成平滑的经验pdf。
+        这样的pdf估计值似乎能更好地表示连续变量的“真实”pdf。
+    </p>
+    <p class="p1">
+        点云的特征点描述符是三维建模、三维物体识别和三维模型配准中的基本表示结构。因此，三维局部特征描述符的构建是许多计算机图形学和计算机视觉技术的核心。
+        为了对下游任务有用，描述符需要满足几个性能要求，如描述性、非业务性、紧凑性、效率和内存占用。
+    </p>
+    <p class="p1">
+        在这些需求中，描述性和鲁棒性被认为是描述器的两个最重要的方面。如果一个特征描述符能够编码关于局部曲面的主要和充分的信息，那么它就是描述性的。
+        也就是说，一个描述符应该提供足够的信息来区分一个局部表面和另一个局部表面。如果一个特征对干扰表面的几个因素(如噪声和非均匀采样密度)敏感，
+        那么它就是鲁棒的。目前，除了基于深度学习的方法外，直接构建三维局部特征描述符主要有三种模式。
+    </p>
+    <div style="display: flex;justify-content: space-around;align-items: center">
+        <img alt="" src="../pics/核密度估计2.jpg" />
+    </div>
+    <p align="center"><strong>图2 平滑参数h对核密度形状的影响</strong></p>
+    <p class="p1">
+        最著名的一组描述符是基于直方图的描述符。直方图是一种非常简单和实用的一维或二维信息表示方法，因此可以实现一维或二维数据的密度估计和快速可视化。
+        然而，直方图的缺点也比较明显：(1)箱子的起始位置和带宽严重影响性能；(2)维数诅咒导致箱数随维数呈指数增长；
+        (3)直方图难以处理三维或三维以上的信息，这在三维域的表示任务中是一个更为严重的问题。
+    </p>
+    <p class="p1">
+        另一类描述符使用二进制模式来描述下表面，二进制描述符在紧凑性和效率方面优于基于直方图的描述符，
+        但在描述性方面性能相对较低。此外，一些3D二进制描述符仅适用于体素模型。
+    </p>
+    <p class="p1">
+        或者，旋转和投影机构通过首先重复旋转并将局部表面投影到2D平面上，然后对产生的2D图像或距离图像进行编码来生成描述符。
+        一个代表性的描述符是旋转投影统计，旋转和投影机构也得到了满意的结果，但旋转和投影操作带来了大量不必要的中间计算。
+    </p>
+    <p class="p1">
+        从直观的角度来看，我们可以不再计算支持区域中点的几何属性，而是将特征点的描述转换为特征点周围三维空间的核密度估计，在不同的区域计算不同的点密度。
+        因此提出的一种新的核密度描述符(KDD)，首先在特征点处计算LRF，并利用与LRF对齐的特征点周围的立方支持区域，
+        然后通过核密度估计来估计三维空间中每个立方体的核密度，克服了直方图的局限性。
+    </p>
+<div id="footer">
+    <div id="footer-text">
+        upload by <strong>Nanami</strong> on Septmber 31, 2022 at 11:35 am. click 
+        <a href="https://docs.google.com/document/d/1M-MOhuszPdpU2-D200y6VULPhSGokdmv/edit?usp=drive_link&ouid=112844428871035202140&rtpof=true&sd=true"><strong>here</strong></a>
+        to access full text.
+    </div>
+</div>
+</body>
+
+
+</html>

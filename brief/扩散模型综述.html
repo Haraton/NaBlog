@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta name="generator" content="jemdoc, see http://jemdoc.jaboc.net/" />
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<link rel="stylesheet" href="../styles/jemdoc.css" type="text/css" />
+<link rel="icon" href="../pics/profile.ico" type="image/x-ico" />
+
+<title>扩散模型综述</title>
+
+</head>
+<body>
+
+<a id="home" class="anchor"></a>
+<div id="container"> 
+<div class="container"> 
+    <h1 style="color: rgb(0, 0, 0); text-align: center">扩散模型综述</h1>
+    <p class="p1">
+        降噪扩散模型已成为计算机视觉近期的最热的新兴主题之一，其在生成式建模领域展示了显著的成果。
+        扩散模型是基于两个阶段的深度生成式模型，一个前向扩散阶段和一个反向扩散阶段。在前向扩散阶段，
+        通过添加高斯噪声，输入数据在几个步骤中逐渐被扰动。在反向扩散阶段，模型的任务是通过学习逐步反演扩散过程来恢复原始输入数据。
+        尽管扩散模型具有已知的计算负担，即由于采样过程中涉及的大量步骤而导致计算速度较低，但由于扩散模型生成的样本的质量和多样性而被广泛认可。
+    </p>
+    <div style="display: flex;justify-content: space-around;align-items: center">
+        <img alt="" src="../pics/生成式模型.jpg" />
+    </div>
+    <p align="center"><strong>图1 不同类型的生成模型概述</strong></p>
+    <p class="p1">
+        我们对视觉中应用的降噪扩散模型的文章进行了全面的调研，包括该领域的理论和实践贡献。
+        我们在图1展示了不同类型的生成模型。首先，我们确定并提出了三个通用的扩散建模框架，它们基于去噪扩散概率模型，
+        噪声条件评分网络和随机微分方程。
+    </p>
+    <p class="p1">
+        <strong>基于去噪扩散概率模型：</strong>与常见的生成模型的机制不同，去噪扩散概率模型不再是通过一个“限制”（比如种类，风格等等）的输入，
+        逐步添加信息，最终得到生成的图片/语音。而是采用从高斯噪音中逐步依照一定条件“采样”特殊的分布，
+        随着“采样”轮次的增加最终得到生成的图片/语音。
+    </p>
+    <p class="p1">
+        <strong>噪声条件评分网络：</strong>通过缓慢注入噪声，将复杂的数据分布平滑地转换为已知的先验分布，以及一个相应的反向时间SDE，
+        通过缓慢去除噪声将先验分布转换回数据分布。关键的是，反向时间SDE仅取决于扰动数据分布的时间相关梯度场（也称为得分）。
+        通过利用基于得分的生成建模的进展，我们可以使用神经网络准确地估计这些分数，并使用数值 SDE 求解器生成样本。
+    </p>
+    <p class="p1">
+        <strong>随机微分方程：</strong>Ho等人引入了一种不需要分类器的指导方法。它只需要一个条件扩散模型和一个无条件版本，
+        但他们使用相同的模型来学习这两种情况。无条件模型是在类标识符等于0的情况下进行训练的。
+        这个想法基于从贝叶斯规则导出的隐式分类器。
+    </p>
+    
+<div id="footer">
+    <div id="footer-text">
+        upload by <strong>Nanami</strong> on May 21, 2023 at 09:19 pm. click 
+        <a href="https://docs.google.com/document/d/1TCvXT4BmeaxySSHjTdOGeutg3OlwHoTt/edit?usp=drive_link"><strong>here</strong></a>
+        to access full text.
+    </div>
+</div>
+</body>
+
+
+</html>

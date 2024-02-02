@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta name="generator" content="jemdoc, see http://jemdoc.jaboc.net/" />
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<link rel="stylesheet" href="../styles/jemdoc.css" type="text/css" />
+<link rel="icon" href="../pics/profile.ico" type="image/x-ico" />
+
+<title>点云处理传统算法总结</title>
+
+</head>
+<body>
+
+<a id="home" class="anchor"></a>
+<div id="container"> 
+<div class="container"> 
+    <h1 style="color: rgb(0, 0, 0); text-align: center">点云处理传统算法总结</h1>
+    <!-- <h2 style="color: rgb(0, 0, 0);">0 引言</h2> -->
+    <p class="p1">
+        3D点云与2D图像不同，它包含了更加丰富的坐标信息，也相对于2D图像隐藏了更多空间结构信息与更丰富的语义信息，
+        处理点云数据并获得其隐含的各种信息便显得尤为重要，在计算机技术高速发展的现代，随着计算手段的增加和计算效率的大幅提高，
+        处理海量点云数据也变的更加现实，各种点云特征提取算法与点云关键点检测算法也得到了高速发展。
+        本文主要分为三个部分，对点云的相关技术进行了调研汇总。
+    </p>
+    <p class="p1">
+        点云是一种描述空间点的位置、颜色等信息的数据结构，相比于图像这种规则的二维数据结构，
+        点云具有无序性、稀疏性、信息不完整性和无组织性等特点。目前，
+        快速点直方图（FPFH）是一种最常用的特征提取算法，它是一种几何特征描述符，考虑局部范围内所有点之间的位置影响和法线关系，
+        描述局部范围内数据的几何特征，具有位置信息不变性的特点。FPFH是点特征直方图（Point Feature Histograms，PFH）的扩展，
+        主要在计算效率方面进行了较大改进，但是依然保留了PFH大部分的特性，计算复杂度为O(nk)。
+    </p>
+    <div style="display: flex;justify-content: space-around;align-items: center">
+        <img alt="" src="../pics/fpfh.jpg" />
+    </div>
+    <p align="center"><strong>图1 中心点P计算FPFH的影响范围</strong></p>
+    <p class="p1">
+        关键点检测是点云配准技术中的一个关键环节。关键点不仅包含了模型的重要信息，而且有助于减少点云计算的数据量，可以节约计算时间和存储空间。
+        早期大部分三维关键点检测算法都是直接从二维拓展而来，如SIFT（Scale Invariant Feature Transform）、Harris等算法。
+        近年来，关键点检测算法得到快速发展，一些新得算法如ISS3D、NARF、RSKDD-Net等也不断被提出。
+        目前存在的关键点提取算法有很多，各种算法有不同的优缺点，根据各算法的计算原理，其在模型上对关键点检测时无论是数量还是旋转平移不变等特性均有不同。
+        因此，研究关键点检测算法针对模型特征的适应性，对于点云配准是很有实用性的。
+    </p>
+    <div style="display: flex;justify-content: space-around;align-items: center">
+        <img alt="" src="../pics/Harris3D.jpg" />
+    </div>
+    <p align="center"><strong>图2 Harris3D 计算面</strong></p>
+    <p class="p1">
+        激光点云的噪声分为离散噪声点和混合噪声点两类。离散噪声在空间上远离目标点，混合噪声在空间上和目标点混合在一起。
+        对于离散噪声点，主要是利用噪声点在空间位置上和目标点存在着明显的差异进行噪声的去除，
+        已经形成的方法有：基于统计的去噪算法，半径滤波去噪算法，基于聚类的去噪算法。
+    </p>
+    
+<div id="footer">
+    <div id="footer-text">
+        upload by <strong>Nanami</strong> on December 12, 2022 at 11:23 am. click 
+        <a href="https://docs.google.com/document/d/1eWoloaOPIaeo_6syjnH3kqmk1DrPXDe2/edit?usp=drive_link&ouid=112844428871035202140&rtpof=true&sd=true"><strong>here</strong></a>
+        to access full text.
+    </div>
+</div>
+</body>
+
+
+</html>
