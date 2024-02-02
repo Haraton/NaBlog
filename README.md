@@ -1,1 +1,1 @@
-haraton.github.io/test/
+haraton.github.io/NaBlog/
